@@ -1,0 +1,17 @@
+{
+  "menu": [
+    {
+      "url": "/dashboard",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-analytics"
+    },
+    {
+      "url": "/requestlist",
+      "name": "Data Request",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+      
+    }
+  ]
+}
