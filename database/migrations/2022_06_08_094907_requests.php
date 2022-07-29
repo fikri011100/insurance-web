@@ -26,6 +26,11 @@ return new class extends Migration
             $table->integer('insurance_set');
             $table->integer('total_price');
             $table->string('status');
+            $table->string('status_payment');
+            $table->string('photo_payment')->nullable();
+            $table->string('photo_taker')->nullable();
+            $table->string('photo_ktp')->nullable();
+            $table->string('photo_kk')->nullable();
             $table->timestamps();
         });
     }

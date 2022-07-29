@@ -13,6 +13,7 @@
 
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')) }}" />
 
+
 <!-- Vendor Styles -->
 @yield('vendor-style')
 

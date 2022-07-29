@@ -21,5 +21,8 @@ class Requests extends Model
         'insurance_set',
         'total_price',
         'status',
+        'status_payment',
+        'photo_payment',
+        'photo_taker',
     ];
 }

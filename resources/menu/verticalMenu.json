@@ -12,6 +12,27 @@
       "icon": "menu-icon tf-icons bx bx-layout",
       "slug": "data-request"
       
+    },
+    {
+      "url": "/addrequest",
+      "name": "Tambah Data Request",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+      
+    },
+    {
+      "url": "/receiptlist",
+      "name": "Lihat Data Kwitansi",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+      
+    },
+    {
+      "url": "/addreceipt",
+      "name": "Tambah Data Kwitansi",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+      
     }
   ]
 }

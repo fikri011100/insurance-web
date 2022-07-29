@@ -6,13 +6,33 @@
 <script src="../path/to/flowbite/dist/datepicker.js"></script>
 <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
 
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span>Request Insurance</h4>
+<h4 class="py-3 mb-1">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb breadcrumb-style1">
+        <li class="breadcrumb-item fw-light text-muted">
+          <a href="javascript:void(0);">Kwitansi</a>
+        </li>
+        <li class="breadcrumb-item fw-light text-muted">
+          <a href="javascript:void(0);">Data</a>
+        </li>
+        <li class="breadcrumb-item fw-light text-muted">
+          <a href="javascript:void(0);">Form</a>
+        </li>
+        <li class="breadcrumb-item fw-light text-muted">
+          <a href="javascript:void(0);">Progess</a>
+        </li>
+        @if($form == "edit")
+          <li class="breadcrumb-item active">{{$data->title}}</li>
+        @endif
+      </ol>
+    </nav>
+</h4>
 
 <div class="row">
 <div class="col-xl">
     <div class="card mb-4">
       <div class="card-body">
-        <form method="POST" action="{{ route('create-requestlist') }}">
+        <form method="POST" action="{{ route('addInsurance', $data) }}">
         @csrf
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Title</label>
