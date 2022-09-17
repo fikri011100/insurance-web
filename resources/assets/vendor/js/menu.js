@@ -20,6 +20,7 @@ class Menu {
     el.classList.add('menu')
     el.classList[this._animate ? 'remove' : 'add']('menu-no-animation') // check
 
+    // el.classList.add('menu-vertical')
     el.classList.add('menu-vertical')
 
     const PerfectScrollbarLib = _PS || window.PerfectScrollbar

@@ -198,6 +198,9 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Riskihajar\Terbilang\TerbilangServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class
     ],
 
     /*
@@ -214,7 +217,9 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class
+        'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
 ];

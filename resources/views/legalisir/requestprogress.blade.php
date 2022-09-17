@@ -9,6 +9,16 @@
   <span class="text-muted fw-light">Request /</span>
 </h4>
 
+@if (session('message'))
+      <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="alert alert-success">
+          {{ session('message') }}
+      </div>
+  @elseif(session('error'))
+      <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="alert alert-danger">
+          {{ session('error') }}
+      </div>
+  @endif
+
 <!-- Basic Bootstrap Table -->
 <div class="card">
   <h5 class="card-header">Detail Request Surat</h5>
@@ -93,6 +103,7 @@
               <th>Detail</th>
               <th>Pembuat Laporan</th>
               <th>Tanggal</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
@@ -102,6 +113,9 @@
                 <td>{{$item->detail_progress}}</td>
                 <td>{{$item->name_user}}</td>
                 <td>{{date('d-m-Y', strtotime($item->created_at))}}</td>
+                <td><a href="{{route('deleteProgress', $item->id)}}" class="btn btn-icon btn-danger" >
+                  <span class="tf-icons bx bx-trash"></span>
+                </a></td>
               </tr>
             @endforeach
           </tbody>

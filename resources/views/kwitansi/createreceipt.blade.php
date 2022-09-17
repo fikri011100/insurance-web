@@ -21,9 +21,15 @@
 <div class="col-xl">
     <div class="card mb-4">
       <div class="card-body">
-        <form method="POST" action="{{ route('createReceipt') }}">
+        <form method="POST" action="{{ route('createReceipt') }}" enctype="multipart/form-data">
         @csrf
-          <div class="mb-3">
+          <div class="mb-3">          
+          <label for="html5-da  te-input" class="col-md-2 col-form-label">Tanggal Kwitansi</label>
+            <div class="col-md-5">
+                <input class="form-control" type="date" id="date_kwitansi" name="date_kwitansi" value="{{$todayDate->format('Y-m-d')}}" />
+            </div>
+          </div>
+          <div class="mb-3"> 
             <label class="form-label" for="basic-icon-default-fullname">Nomor MR</label>
             <div class="input-group input-group-merge">
               <input type="text" class="form-control" id="medical_record" name="medical_record" placeholder="Nomor MR" aria-label="Nomor MR" aria-describedby="basic-icon-default-fullname2" />
@@ -42,12 +48,6 @@
             </div>
           </div>
           <div class="mb-3">
-            <label class="form-label" for="basic-icon-default-fullname">Harga</label>
-            <div class="input-group input-group-merge">
-              <input type="text" class="form-control" id="price" name="price" placeholder="Harga" aria-label="Harga" aria-describedby="basic-icon-default-fullname2" />
-            </div>
-          </div>  
-          <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Discount</label>
             <div class="input-group input-group-merge">
               <input type="text" class="form-control" id="discount" name="discount" placeholder="Discount" aria-label="Discount" aria-describedby="basic-icon-default-fullname2" />
@@ -55,21 +55,41 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Penjamin</label>
+            <select id="penjamin" name="penjamin" class="form-select">
+              @foreach ($insurance as $items)
+                <option value="{{$items->name}}" >{{$items->name}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-icon-default-fullname">Biaya</label>
             <div class="input-group input-group-merge">
-              <input type="text" class="form-control" id="penjamin" name="penjamin" placeholder="Penjamin" aria-label="Penjamin" aria-describedby="basic-icon-default-fullname2" />
+              <input type="text" class="form-control" id="price" name="price" placeholder="Biaya" aria-label="Biaya" aria-describedby="basic-icon-default-fullname2" />
+            </div>
+          </div>  
+          <div class="mb-3">          
+          <label for="html5-date-input" class="col-md-2 col-form-label">Tanggal Masuk Berobat</label>
+            <div class="col-md-5">
+                <input class="form-control" type="date" id="date_pengobatan" name="date_pengobatan" value="{{$todayDate->format('Y-m-d')}}" />
             </div>
           </div>
           <div class="mb-3">          
-          <label for="html5-date-input" class="col-md-2 col-form-label">Tanggal Berobat</label>
+          <label for="html5-date-input" class="col-md-2 col-form-label">Tanggal Keluar</label>
             <div class="col-md-5">
-                <input class="form-control" type="date" id="date_pengobatan" name="date_pengobatan" />
+                <input class="form-control" type="date" id="date_keluar_pengobatan" name="date_keluar_pengobatan" value="{{$todayDate->format('Y-m-d')}}"/>
             </div>
           </div>
           <label class="form-label mt-3" for="basic-icon-default-fullname">Pilih Template Surat</label>
             <div class="form-check mt-2">
-              <input class="form-check-input" type="checkbox" value="rekapbiaya" id="checkboxRekapBiaya" name="checkboxRekapBiaya" />
-              <label class="form-check-label" for="checkboxRekapBiaya">
-                Rekap Biaya Pelayanan
+              <input class="form-check-input" type="checkbox" value="summary" id="checkboxSummary" name="checkboxSummary" />
+              <label class="form-check-label" for="checkboxSummary">
+                Summary
+              </label>
+            </div>
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" value="kuitansi-netto" id="checkboxKuitansiNetto" name="checkboxKuitansiNetto" />
+              <label class="form-check-label" for="checkboxKuitansiNetto">
+                Kuitansi / Receipt (Netto)
               </label>
             </div>
             <div class="form-check">
@@ -81,7 +101,7 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="kuitansi" id="checkboxKuitansi" name="checkboxKuitansi" />
               <label class="form-check-label" for="checkboxKuitansi">
-                Kuitansi / Receipt
+                Kuitansi / Receipt (Brutto)
               </label>
             </div>
           <button type="submit" class="btn btn-primary mt-2">Send</button>

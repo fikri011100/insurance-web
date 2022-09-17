@@ -9,15 +9,13 @@
 <h4 class="py-3 mb-1">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-style1">
-      <li class="breadcrumb-item fw-light text-muted">
-        <a href="javascript:void(0);">Insurance</a>
-      </li>
-      <li class="breadcrumb-item fw-light text-muted">
-        <a href="javascript:void(0);">Form</a>
-      </li>
-      @if($form == "edit")
+        <li class="breadcrumb-item fw-light text-muted">
+            <a href="javascript:void(0);">Insurance</a>
+        </li>
+        <li class="breadcrumb-item fw-light text-muted">
+            <a href="javascript:void(0);">Form</a>
+        </li>
         <li class="breadcrumb-item active">{{$data->name}}</li>
-      @endif
     </ol>
   </nav>
 </h4>
@@ -26,8 +24,9 @@
   <div class="col-xl">
     <div class="card mb-4">
       <div class="card-body">
-        <form method="POST" action="{{ isset($form)?route('createInsurance'):route('editInsurance', $data->id) }}">
-        @csrf
+        <form action="{{ route('updateInsurance', $data->id) }}"
+        method="POST" enctype="multipart/form-data">
+          @csrf
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Nama Asuransi</label>
             <div class="input-group input-group-merge">
@@ -35,15 +34,12 @@
             </div>
           </div>
           <div class="mb-3">
-            <div class="mb-3">
-                <label for="defaultSelect" class="form-label">Status ()</label>
-                <select id="status" name="status" class="form-select">
-                    <option value="0" {{(isset($data->status))?($data->status == 0)?'selected':'':''}} >Langsung diproses</option>
-                    <option value="1" {{(isset($data->status))?($data->status == 1)?'selected':'':''}} >Perlu dikonfirmasi</option>
-                </select>
+            <label class="form-label" for="basic-icon-default-fullname">Nomor Virtual Account</label>
+            <div class="input-group input-group-merge">
+              <input type="text" class="form-control" id="no_va" name="no_va" value="{{(isset($data->no_va))?$data->no_va:old('no_va')}}"  placeholder="no_va" aria-label="no_va" aria-describedby="basic-icon-default-fullname2" />
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Kirim</button>
+          <button type="submit" class="btn btn-primary">Ubah</button>
         </form>
       </div>
     </div>

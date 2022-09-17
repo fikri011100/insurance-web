@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('request_email');
             $table->string('request_patient');
             $table->string('request_phone');
-            $table->date('date_birth');
+            $table->date('birthday');
             $table->date('date_medicine');
             $table->string('insurance');
             $table->string('episode');

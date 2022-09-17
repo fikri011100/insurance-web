@@ -15,6 +15,17 @@
 @endsection
 
 @section('content')
+
+@if (session('message'))
+  <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="alert alert-success">
+      {{ session('message') }}
+  </div>
+@elseif(session('error'))
+  <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="alert alert-danger">
+      {{ session('error') }}
+  </div>
+@endif
+
 <div class="row">
   <!-- Total Revenue -->
   <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
@@ -54,68 +65,25 @@
       </div>
     </div>
   </div>
-  <!-- Asuransi -->
-  <div class="col-md-6 col-lg-4 order-2 mb-4">
-    <div class="card h-100">
-      <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="card-title m-0 me-2">Asuransi</h5>
-        <div class="dropdown">
-          <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-dots-vertical-rounded"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-            <a class="dropdown-item" href="{{route('addInsurance')}}">Tambah Data</a>
-          </div>
+  <!-- Modal -->
+  <div class="modal modal-top fade" id="modalTop" tabindex="-1">
+    <div class="modal-dialog">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalTopTitle">Peringatan</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
-      <div class="card-body">
-        <ul class="p-0 m-0 mt-3">
-        @foreach($insurances as $item)
-          <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/cc-primary.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <h6 class="mb-0">{{$item->name}}</h6>
-              </div>
-              <div class="justify-end">
-                <a href="{{route('editInsurance', $item->id)}}">
-                  <button type="button" class="btn btn-icon btn-outline-primary">
-                    <span class="tf-icons bx bx-pencil"></span>
-                  </button>
-                </a>
-                
-                  <button type="button" class="btn btn-icon btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalTop">
-                    <span class="tf-icons bx bx-trash"></span>
-                  </button>
-                
-              </div>
-          </li>
-          @endforeach
-        </ul>
-      </div>
+        <div class="modal-body">
+          Apakah anda yakin ingin menghapus produk asuransi ini?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+          <a href="">
+            <button type="button" class="btn btn-danger">Hapus</button>
+          </a>
+        </div>
+      </form>
     </div>
   </div>
-    <!-- Modal -->
-    <div class="modal modal-top fade" id="modalTop" tabindex="-1">
-      <div class="modal-dialog">
-        <form class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="modalTopTitle">Peringatan</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            Apakah anda yakin ingin menghapus produk asuransi ini?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-            <a href="{{route('deleteInsurance', $item->id)}}">
-              <button type="button" class="btn btn-danger">Hapus</button>
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
 </div>
 @endsection

@@ -24,8 +24,14 @@ $container = ($container ?? 'container-xxl');
   <div class="layout-container">
 
   @if ($isMenu)
-    @include('layouts/selection/menu/verticalMenu')
+    @if (auth()->user()->user_type == 0)
+      @include('layouts/selection/menu/verticalMenu')
+    @elseif (auth()->user()->user_type == 1)
+      @include('layouts/selection/menu/menuKwitansi')
+    @elseif (auth()->user()->user_type == 2)
+      @include('layouts/selection/menu/userKwitansi')
     @endif
+  @endif
 
 
 

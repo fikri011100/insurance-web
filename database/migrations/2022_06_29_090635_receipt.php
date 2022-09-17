@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('medical_record');
             $table->string('episode');
             $table->string('nama_pasien');
-            $table->integer('price');
+            $table->bigInteger('price');
             $table->integer('discount');
             $table->string('user_name');
             $table->string('penjamin');

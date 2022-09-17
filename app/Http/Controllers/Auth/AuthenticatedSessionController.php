@@ -20,6 +20,11 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+    public function createKwitansi()
+    {
+        return view('auth.authkwitansi.loginkwitansi');
+    }
+
     /**
      * Handle an incoming authentication request.
      *

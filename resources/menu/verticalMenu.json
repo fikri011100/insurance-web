@@ -1,24 +1,49 @@
 {
   "menu": [
     {
-      "url": "/dashboard",
+      "url": "/",
       "name": "Dashboard",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard-analytics"
     },
     {
+      "url": "/listinsurances",
+      "name": "Master Data Asuransi",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+    },
+    {
       "url": "/requestlist",
-      "name": "Data Request",
+      "name": "Rekap Tagihan",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+    },
+    {
+      "url": "/addrequest",
+      "name": "Tambah Request Legalisir",
       "icon": "menu-icon tf-icons bx bx-layout",
       "slug": "data-request"
       
     },
     {
-      "url": "/addrequest",
-      "name": "Tambah Data Request",
+      "url": "/listprices",
+      "name": "Master Data Tarif Legalisir",
       "icon": "menu-icon tf-icons bx bx-layout",
       "slug": "data-request"
-      
+    },
+    {
+      "url": "/listresi",
+      "name": "Master Data Kirim Legalisir",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+    }
+  ],
+  "kwitansi": [
+    {
+      "url": "/listinsurances",
+      "name": "Master Data Asuransi",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
     },
     {
       "url": "/receiptlist",
@@ -32,6 +57,13 @@
       "name": "Tambah Data Kwitansi",
       "icon": "menu-icon tf-icons bx bx-layout",
       "slug": "data-request"
+      
+    },
+    {
+      "url": "/adddiscount",
+      "name": "Tambah Discount",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "adddiscount"
       
     }
   ]

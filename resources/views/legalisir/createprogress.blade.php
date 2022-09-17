@@ -18,22 +18,17 @@
         <li class="breadcrumb-item fw-light text-muted">
           <a href="javascript:void(0);">Form</a>
         </li>
-        <li class="breadcrumb-item fw-light text-muted">
-          <a href="javascript:void(0);">Progess</a>
-        </li>
-        @if($form == "edit")
-          <li class="breadcrumb-item active">{{$data->title}}</li>
-        @endif
+        <li class="breadcrumb-item active">Progress</li>  
       </ol>
-    </nav>
+  </nav>
 </h4>
 
 <div class="row">
-<div class="col-xl">
+  <div class="col-xl">
     <div class="card mb-4">
       <div class="card-body">
-        <form method="POST" action="{{ route('addInsurance', $data) }}">
-        @csrf
+        <form method="POST" enctype="multipart/form-data" action="{{ route('createProgress', $data) }}">
+          @csrf
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Title</label>
             <div class="input-group input-group-merge">
@@ -44,8 +39,7 @@
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Keterangan</label>
             <div class="input-group input-group-merge">
-              <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
-              <input type="text" class="form-control" id="detail_progress" name="detail_progress" placeholder="Keterangan" aria-label="Nama Request" aria-describedby="basic-icon-default-fullname2" />
+              <textarea type="text" class="form-control" id="detail_progress" name="detail_progress" placeholder="Keterangan" aria-label="Nama Request" aria-describedby="basic-icon-default-fullname2"></textarea>
             </div>
           </div>
           <button type="submit" class="btn btn-primary">Send</button>
