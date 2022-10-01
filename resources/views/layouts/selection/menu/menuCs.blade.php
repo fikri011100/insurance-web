@@ -13,7 +13,7 @@
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1 mt-5">
-    @foreach ($menuData[0]->menu as $menu)
+    @foreach ($menuData[0]->cs as $menu)
 
     {{-- adding active and open class if child is active --}}
 

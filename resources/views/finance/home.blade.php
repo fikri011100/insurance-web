@@ -29,7 +29,7 @@ $container = ($container ?? 'container-xxl');
     @elseif (auth()->user()->user_type == 1)
       @include('layouts/selection/menu/menuKwitansi')
     @elseif (auth()->user()->user_type == 2)
-      @include('layouts/selection/menu/userKwitansi')
+      @include('layouts/selection/menu/menuUser')
     @endif
   @endif
 

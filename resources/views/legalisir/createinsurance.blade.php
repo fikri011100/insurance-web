@@ -36,6 +36,12 @@
               <input type="text" class="form-control" id="no_va" no_va="no_va"  placeholder="no_va" aria-label="no_va" aria-describedby="basic-icon-default-fullname2" />
             </div>
           </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-icon-default-fullname">Alamat</label>
+            <div class="input-group input-group-merge">
+              <input type="text" class="form-control" id="alamat" name="alamat"  placeholder="alamat" aria-label="alamat" aria-describedby="basic-icon-default-fullname2" />
+            </div>
+          </div>
           <button type="submit" class="btn btn-primary">Kirim</button>
         </form>
       </div>

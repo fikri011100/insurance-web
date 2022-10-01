@@ -18,6 +18,7 @@ class Insurances extends Model
         'no_va',
         'name',
         'status',
+        'alamat',
         'description'
     ];
 

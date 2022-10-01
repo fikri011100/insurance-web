@@ -177,10 +177,8 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label" for="basic-icon-default-phone">Alamat</label>
-                  <div class="input-group input-group-merge">
-                    <input type="text" id="alamat" name="alamat" class="form-control phone-mask" placeholder="Alamat" aria-label="Alamat" aria-describedby="basic-icon-default-phone2" />
-                  </div>
+                  <label class="form-label" for="nameLarge">Alamat</label>
+                    <textarea type="text" id="alamat" name="alamat" class="form-control phone-mask" placeholder="Alamat" aria-label="Alamat" aria-describedby="basic-icon-default-phone2">{{App\Models\Insurances::where('name', $item->insurance)->first()->alamat}}</textarea>
                 </div>
             </div>
           </div>

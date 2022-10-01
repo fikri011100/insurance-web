@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('no_va');
             $table->string('name');
             $table->string('status');
+            $table->string('alamat');
             $table->string('description');
             $table->timestamps();
         });

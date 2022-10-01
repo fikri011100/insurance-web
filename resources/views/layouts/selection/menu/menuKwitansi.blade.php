@@ -1,12 +1,9 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
   <!-- ! Hide app brand if navbar-full -->
-  <div class="app-brand demo">
+  <div class="app-brand demo mt-4">
     <a href="{{url('/')}}" class="app-brand-link">
-      <span class="app-brand-logo demo">
-        @include('_partials.macros',["width"=>25,"withbg"=>'#696cff'])
-      </span>
-      <span class="app-brand-text demo menu-text fw-bold ms-2">{{config('variables.templateName')}}</span>
+      <img class="w-22 h-22" src="{{ url('logo-rs-premier-surabaya.png') }}" />
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-autod-block d-xl-none">
@@ -16,7 +13,7 @@
 
   <div class="menu-inner-shadow"></div>
 
-  <ul class="menu-inner py-1">
+  <ul class="menu-inner py-1 mt-5">
     @foreach ($menuData[0]->kwitansi as $kwitansi)
 
     {{-- adding active and open class if child is active --}}

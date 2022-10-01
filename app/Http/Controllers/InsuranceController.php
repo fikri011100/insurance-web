@@ -26,6 +26,7 @@ class InsuranceController extends Controller
 
         $data['name'] = $request->get('name');
         $data['no_va'] = $request->get('no_va');
+        $data['alamat'] = $request->get('alamat');
         $data['status'] = $request->get('status');
         $data['description'] = $request->get('description');
 
@@ -40,6 +41,7 @@ class InsuranceController extends Controller
         Insurances::create([
             'name' => $request->name,
             'no_va' => $request->no_va,
+            'alamat' => $request->alamat,
             'status' => "0",
             'description' => ""
         ]);

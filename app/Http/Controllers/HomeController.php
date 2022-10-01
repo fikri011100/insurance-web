@@ -138,7 +138,7 @@ class HomeController extends Controller
 
         Auth::logout();
 
-        return view('auth\login');
+        return redirect()->route('login');
     }
 
     public function csHome() {

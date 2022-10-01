@@ -66,5 +66,42 @@
       "slug": "adddiscount"
       
     }
+  ],
+  "user": [
+    {
+      "url": "/requestlist",
+      "name": "Rekap Tagihan",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+    },
+    {
+      "url": "/receiptlist",
+      "name": "Lihat Data Kwitansi",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+      
+    },
+    {
+      "url": "/addreceipt",
+      "name": "Tambah Data Kwitansi",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+      
+    }
+  ],
+  "cs": [
+    {
+      "url": "/requestlist",
+      "name": "Rekap Tagihan",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+    },
+    {
+      "url": "/addrequest",
+      "name": "Tambah Request Legalisir",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "data-request"
+      
+    }
   ]
 }

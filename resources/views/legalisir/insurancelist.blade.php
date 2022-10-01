@@ -36,6 +36,7 @@
           <th>No</th>
           <th>@sortablelink('name','Nama Asuransi')</th>
           <th>@sortablelink('no_va','Nomor VA')</th>
+          <th>Alamat</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -51,6 +52,7 @@
             <tr class="text-nowrap">
               <td>{{ $nomor++ }}</td>
               <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$item->name}}</strong></td>
+              <td>{{$item->no_va}}</td>
               <td>{{$item->no_va}}</td>
               @if ($item->status == '1')
                 <td><span class="badge bg-label-warning me-1">Tidak Aktif</span></td>
@@ -73,32 +75,32 @@
     </table>
     <!-- Modal -->
     @foreach ($insurances as $i => $item)
-      <div class="modal modal-top fade" id="delete{{ $item->id }}" role="dialog" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <form class="modal-content">
-            <div class="modal-header">
-              <h3>Peringatan</h3>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form action="{{route('deleteInsurance', $item->id)}}" method="POST", enctype="multipart/form-data">
-                @csrf
-                <text>Apakah anda yakin ingin me-nonaktifkan asuransi {{$item->name}}?</text>
+    <div class="modal modal-top fade" id="delete{{ $item->id }}" role="dialog" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <form class="modal-content">
+          <div class="modal-header">
+            <h3>Peringatan</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{route('deleteInsurance', $item->id)}}" method="POST", enctype="multipart/form-data">
+              @csrf
+              <text>Apakah anda yakin ingin me-nonaktifkan asuransi {{$item->name}}?</text>
 
-                  <div class="row mt-3">
-                    <div class="col mb-3">
-                      <label for="nameLarge" class="form-label">Keterangan</label>
-                      <textarea class="form-control" id="description" name="description" placeholder="Keterangan" rows="3"></textarea>
-                    </div>
+                <div class="row mt-3">
+                  <div class="col mb-3">
+                    <label for="nameLarge" class="form-label">Keterangan</label>
+                    <textarea class="form-control" id="description" name="description" placeholder="Keterangan" rows="3"></textarea>
                   </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" >Hapus</button>
-            </div>
-          </form>
-        </div>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" >Hapus</button>
+          </div>
+        </form>
       </div>
+    </div>
     @endforeach
     <div class="modal modal-top fade" id="modalPrint" tabindex="-1">
       <div class="modal-dialog">
