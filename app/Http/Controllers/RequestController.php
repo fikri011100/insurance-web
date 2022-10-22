@@ -13,6 +13,7 @@ use Str;
 use Storage;
 use PDF;
 use App\Models\RequestProgress;
+use App\Models\Discount;
 use Dompdf\Dompdf;
 use SortAndFilter;
 
@@ -35,7 +36,7 @@ class RequestController extends Controller
                                     ->onEachSide(2)->fragment('requests');
         }
 
-        return view('legalisir\requestlist', $requests);
+        return view('legalisir.requestlist', $requests);
     }
 
     public function createRequest(Request $request) {
@@ -43,6 +44,9 @@ class RequestController extends Controller
         $prices = Price::where("status", 0)->first();
         $price = $prices->legalisir_price * $request->get('insurance_set');
         $statusPayment = "0";
+        $discount = Discount::where('insurance', $request->get('insurance')->first();
+        $priceDiscount = ($discount->base_discount / 100) * $price;
+
 
         if($request->hasfile('photo_payment')){
             $files = $request->file('photo_payment');
@@ -66,7 +70,7 @@ class RequestController extends Controller
             'insurance' => $request->get('insurance'),
             'episode' => $request->get('episode'),
             'insurance_set' => $request->get('insurance_set'),
-            'total_price' => $price,
+            'total_price' => $priceDiscount,
             'status' => $request->get('status'),
             'status_payment' => $statusPayment,
             'photo_payment' => $namePayment,
@@ -115,20 +119,20 @@ class RequestController extends Controller
         $data['insurance'] = Insurances::orderBy('name', 'ASC')->get();
         $data['price'] = Price::where('status', '0')->first();
         
-        return view('legalisir\createrequest', $data);
+        return view('legalisir.createrequest', $data);
     }
 
     public function addProgress($id) {
         $data['data'] = $id;
         
-        return view('legalisir\createprogress', $data);
+        return view('legalisir.createprogress', $data);
     }
 
     public function editRequest($id) {
         $data['data']  = Requests::findOrFail($id);
         $data['insurance'] = Insurances::orderBy('name', 'ASC')->get();
         
-        return view('legalisir\updaterequest', $data);
+        return view('legalisir.updaterequest', $data);
     }
 
     public function listProgress($id) {
@@ -138,13 +142,13 @@ class RequestController extends Controller
         $data['id'] = $id;
         $data['request'] = Requests::findOrFail($id);
         
-        return view('legalisir\requestprogress', $data);
+        return view('legalisir.requestprogress', $data);
     }
 
     public function listResi() {
         $data = Resi::orderBy('created_at', 'desc')->paginate();
 
-        return view('legalisir\listresi', compact('data'));
+        return view('legalisir.listresi', compact('data'));
     }
 
     public function updateDataRequest(Request $request, $id) {

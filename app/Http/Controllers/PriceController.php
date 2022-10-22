@@ -12,13 +12,13 @@ class PriceController extends Controller
     public function index() {
         $price = Price::orderBy('created_at', 'desc')->paginate(10);
 
-        return view('legalisir\pricelist', compact('price'));
+        return view('legalisir.pricelist', compact('price'));
     }
 
     public function addPrice() {
         $data['todayDate'] = Carbon::now();
 
-        return view('legalisir\createprice', $data);
+        return view('legalisir.createprice', $data);
     }
 
     public function createPrice(Request $request) {

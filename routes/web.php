@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
     //discount
     Route::get('/adddiscount', [DiscountController::class, 'addDiscount'])->name('addDiscount');
     Route::post('/creatediscount', [DiscountController::class, 'createDiscount'])->name('createDiscount');
+    Route::get('/getDiscount/{insurance}',[DiscountController::class, 'getDiscount'])->name('getDiscount');
 
     Route::post('/import', [HomeController::class, 'fileImport'])->name('file-import');
     Route::post('/importss', [HomeController::class, 'fileExport'])->name('file-export');

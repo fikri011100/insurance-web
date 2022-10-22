@@ -69,11 +69,14 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Nama Asuransi</label>
-            <select id="insurance" name="insurance" class="form-select">
+            <select id="insurance" name="insurance" class="form-select mb-2">
+              <option value="">--Pilih Penjamin--</option>
               @foreach ($insurance as $items)
                 <option value="{{$items->name}}" >{{$items->name}}</option>
               @endforeach
             </select>
+              <span id="discount" class="ml-4"></span>
+            
           </div>
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Episodes</label>
@@ -131,4 +134,31 @@
     </div>
   </div>
 </div>
+<!-- <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script> -->
+<script type="text/javascript">
+  document.querySelector('#insurance').addEventListener('change', ev => {
+    // $discount = App\Model\Discount::where('insurance', ev.target.value)->first();
+    document.querySelector('#discount').innerHTML = ev.target.value;
+    if (ev.target.value != "") {
+      // fetchData(ev.target.value);
+      var insurance = "* Berhasil menambahkan diskon untuk penggunaan asuransi " + ev.target.value;
+      document.querySelector('#discount').innerHTML = insurance;
+    }
+  });
+
+  // function fetchData(insurance) {
+  //   $.ajax({
+  //     url : '/getDiscount/'+insurance,
+  //     type: 'get',
+  //     dataType: 'json',
+  //     success:function (response) {
+  //       var insurance = '* Diskon yang didapatkan dari ' + name;
+  //       document.querySelector('#discount').innerHTML = name;
+  //       // $('#discount span') = insurance;
+  //     }error: function(data) {
+  //       document.querySelector('#discount').innerHTML = data;
+  //     }
+  //   });
+  // }
+</script>
 @endsection

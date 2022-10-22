@@ -32,33 +32,21 @@
             @endforeach
           </select>
         </div>
-        <div class="mb-3">
-          <label class="form-label" for="basic-icon-default-fullname">Episode</label>
-          <div class="input-group input-group-merge">
-            <input type="text" class="form-control" id="episode" name="episode"  placeholder="episode" aria-label="episode" aria-describedby="basic-icon-default-fullname2" />
-          </div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="basic-icon-default-fullname">Total Bill yang Dijamin</label>
-          <div class="input-group input-group-merge">
-            <input type="text" class="form-control" id="total_bill" name="total_bill"  placeholder="Total Bill" aria-label="total_bill" aria-describedby="basic-icon-default-fullname2" />
-          </div>
-        </div>
         <label class="form-label mt-3" for="basic-icon-default-fullname">Pilih Pengecualian</label>
             <div class="form-check mt-2">
-              <input class="form-check-input" type="checkbox" value="doctor" id="checkboxDoctor" name="checkboxDoctor" />
+              <input class="form-check-input" type="checkbox" value="1" id="checkboxDoctor" name="checkboxDoctor" />
               <label class="form-check-label" for="checkboxDoctor">
                 Jasa Dokter
               </label>
             </div>
             <div class="form-check mt-2">
-              <input class="form-check-input" type="checkbox" value="medicine" id="checkboxMedicine" name="checkboxMedicine" />
+              <input class="form-check-input" type="checkbox" value="1" id="checkboxMedicine" name="checkboxMedicine" />
               <label class="form-check-label" for="checkboxMedicine">
                 Obat
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="implant" id="checkboxImplant" name="checkboxImplant" />
+              <input class="form-check-input" type="checkbox" value="1" id="checkboxImplant" name="checkboxImplant" />
               <label class="form-check-label" for="checkboxImplant">
                 Implant
               </label>
@@ -67,12 +55,6 @@
             <label class="form-label" for="basic-icon-default-fullname">Dasar Discount</label>
             <div class="input-group input-group-merge">
               <input type="text" class="form-control" id="base_discount" name="base_discount"  placeholder="Dasar Discount" aria-label="base_discount" aria-describedby="basic-icon-default-fullname2" />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="basic-icon-default-fullname">Total Discount</label>
-            <div class="input-group input-group-merge">
-              <input type="text" class="form-control" id="discount" name="discount"  placeholder="Discount" aria-label="discount" aria-describedby="basic-icon-default-fullname2" />
             </div>
           </div>
         <button type="submit" class="btn btn-primary">Kirim</button>

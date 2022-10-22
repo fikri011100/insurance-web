@@ -40,7 +40,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('finance\home');
+        return view('finance.home');
     }
 
     public function showDashboard(MonthlyRequestChart $chart) {
@@ -61,18 +61,18 @@ class HomeController extends Controller
         $dats['type'] = $user;
         $dats['chart']   = $chart->build();
 
-        return view('finance\dashboard', $dats);
+        return view('finance.dashboard', $dats);
     }
 
     public function addInsurance() {
 
-        return view('legalisir\createinsurance');
+        return view('legalisir.createinsurance');
     }
 
     public function editInsurance($id) {
         $data = Insurances::findOrFail($id);
 
-        return view('legalisir\updateinsurance', compact('data'));
+        return view('legalisir.updateinsurance', compact('data'));
     }
 
     public function updateInsurance(Request $request, $id) {
@@ -142,7 +142,7 @@ class HomeController extends Controller
     }
 
     public function csHome() {
-        return view('legalisir\createrequest');
+        return view('legalisir.createrequest');
     }
 
     public function deleteInsurance($id)
@@ -179,7 +179,7 @@ class HomeController extends Controller
 
     public function fileImportExport()
     {
-       return view('finance/file-import');
+       return view('finance.file-import');
     }
    
     /**

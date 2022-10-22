@@ -33,7 +33,7 @@
           <div class="mb-3">
             <label class="form-label" for="basic-icon-default-fullname">Nomor Virtual Account</label>
             <div class="input-group input-group-merge">
-              <input type="text" class="form-control" id="no_va" no_va="no_va"  placeholder="no_va" aria-label="no_va" aria-describedby="basic-icon-default-fullname2" />
+              <input type="text" class="form-control" id="no_va" name="no_va"  placeholder="no_va" aria-label="no_va" aria-describedby="basic-icon-default-fullname2" />
             </div>
           </div>
           <div class="mb-3">

@@ -35,14 +35,14 @@ class ReceiptController extends Controller
                                 ->paginate(10)
                                 ->onEachSide(2)->fragment('receipt');
 
-        return view('kwitansi\receiptlist', $requests);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        return view('kwitansi.receiptlist', $requests);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     }
 
     public function addReceipt() {
         $data['insurance'] = Insurances::orderBy('name', 'ASC')->get();
         $data['todayDate'] = Carbon::now();
 
-        return view('kwitansi\createreceipt', $data);
+        return view('kwitansi.createreceipt', $data);
     }
 
     public function editReceipt($id) {
@@ -50,7 +50,7 @@ class ReceiptController extends Controller
         $data['receipt'] = Receipt::findOrFail($id);
         $data['todayDate'] = Carbon::now();
      
-        return view('kwitansi\updatereceipt', $data);
+        return view('kwitansi.updatereceipt', $data);
     }
 
     public function createReceipt(Request $request) {
@@ -106,7 +106,7 @@ class ReceiptController extends Controller
     public function costRecap($id) {
         $data['data']  = Receipt::findOrFail($id);
         
-        return view('finance\costrecap', $data);
+        return view('finance.costrecap', $data);
     }
 
     public function convertWordToPDF($id, $category) {
