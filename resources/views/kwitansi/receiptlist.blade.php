@@ -18,9 +18,11 @@
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb breadcrumb-style1">
         <li class="breadcrumb-item fw-light text-muted">
-          <a href="javascript:void(0);">Kwitansi</a>
+          <a href="{{route('receiptList')}}">Kwitansi</a>
         </li>
-        <li class="breadcrumb-item active">Data</li>
+        <li class="breadcrumb-item active">
+          <a href="{{route('receiptList')}}">Data</a>
+        </li>
       </ol>
     </nav>
 </h4>
@@ -29,7 +31,7 @@
 <div class="card">
   <div class="card-header flex justify-between">
     <h5 >List Daftar Kwitansi</h5>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalFilter">Sort</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalFilter">Filter</button>
   </div>
   <div class="table-responsive text-nowrap">
     <table class="table">
@@ -44,6 +46,7 @@
           <th>
             @sortablelink('created_at','Tanggal')
           </th>
+          <th>Pembuat</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -64,6 +67,7 @@
               <td>{{$item->nama_pasien}}</td>
               <td>{{number_format($item->price)}}</td>
               <td>{{date('d F Y', strtotime($item->created_at))}}</td>
+              <td>{{$item->user_name}}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>

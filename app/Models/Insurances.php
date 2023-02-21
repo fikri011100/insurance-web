@@ -23,7 +23,6 @@ class Insurances extends Model
     ];
 
     protected $sortable = [
-        'name',
-        'no_va'
+        'name'
     ];
 }

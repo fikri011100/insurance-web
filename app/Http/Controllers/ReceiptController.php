@@ -31,6 +31,15 @@ class ReceiptController extends Controller
             $receipt = Receipt::whereBetween('created_at', [$request->get('from_date'), $request->get('to_date')]);
         }
 
+        if (request('search')) {
+            $requests['receipt'] = $receipt->where('medical_record', 'like', '%' . $request->get('search'))
+                                ->orWhere('episode', 'like', '%' . $request->get('search'))
+                                ->orWhere('nama_pasien', 'like', '%' . $request->get('search'))
+                                ->sortable()
+                                ->paginate(10)
+                                ->onEachSide(2)->fragment('receipt');
+        }
+
         $requests['receipt'] = $receipt->sortable()
                                 ->paginate(10)
                                 ->onEachSide(2)->fragment('receipt');
@@ -41,6 +50,24 @@ class ReceiptController extends Controller
     public function addReceipt() {
         $data['insurance'] = Insurances::orderBy('name', 'ASC')->get();
         $data['todayDate'] = Carbon::now();
+        $receipt = Receipt::orderBy('created_at', 'desc')->first();
+        if ($receipt == null) {
+            $receipt = 1;
+        } else {
+            $receipt = $receipt->id + 1;
+        }
+        $date = date('Y-m-d H:i:s');
+        $newDate = Carbon::createFromFormat('Y-m-d H:i:s', $date)
+                                    ->format('m/Y');
+        $ids = "";
+        if ($receipt > 0 && $receipt < 10) {
+            $ids = "00" . $receipt;
+        } else if ($receipt > 10 && $receipt < 100) {
+            $ids = "0" . $receipt;
+        } else {
+            $ids = "" . $receipt;
+        }
+        $data['no_receipt'] = "MH-". $ids . "/" . $newDate;
 
         return view('kwitansi.createreceipt', $data);
     }
@@ -75,15 +102,54 @@ class ReceiptController extends Controller
             $ids = "" . $receipt;
         }
         $noReceipt = "MH-". $ids . "/" . $newDate;
+        $price = str_replace('Rp. ', '', $request->get('price'));
+        $price = str_replace('.', '', $price);
+        $discount = str_replace('Rp. ', '', $request->get('discount'));
+        $discount = str_replace('.', '', $discount);
+        
 
         Receipt::create([
-            'no_receipt' => $noReceipt,
+            'no_receipt' => $$requst->get('no_kwitansi'),
             'medical_record' => $request->get('medical_record'),
             'episode' => $request->get('episode'),
             'nama_pasien' => $request->get('nama_pasien'),
-            'price' => $request->get('price'),
-            'discount' => $request->get('discount'),
+            'price' => $price,
+            'discount' => $discount,
             'user_name' => $user,
+            'penjamin' => $request->get('penjamin'),
+            'date_pengobatan' => $request->get('date_pengobatan')
+        ]);
+        if ($request->get('checkboxSummary') != null) {
+            $this->convertWordToPDF($receipt, "biaya");
+        }
+        if ($request->get('checkboxKuitansiBrutto') != null) {
+            $this->convertWordToPDF($receipt, "kuitansi-brutto");
+        }
+        if ($request->get('checkboxKredit') != null) {
+            $this->convertWordToPDF($receipt, "kredit");
+        }
+        if ($request->has('checkboxKuitansiNetto') != null ) {
+            $this->convertWordToPDF($receipt, "kuitansi-netto");
+        }
+
+        return redirect()->route('receiptList')->with('message', 'Post Created Successfully');
+    }
+
+    public function updateReceipt(Request $request, $id) {
+        $data = $request->all();
+        $receipt = Receipt::findOrFail($id);
+        $price = str_replace('Rp. ', '', $request->get('price'));
+        $price = str_replace('.', '', $price);
+        $discount = str_replace('Rp. ', '', $request->get('discount'));
+        $discount = str_replace('.', '', $discount);
+        
+
+        $receipt->update([
+            'medical_record' => $request->get('medical_record'),
+            'episode' => $request->get('episode'),
+            'nama_pasien' => $request->get('nama_pasien'),
+            'price' => $price,
+            'discount' => $discount,
             'penjamin' => $request->get('penjamin'),
             'date_pengobatan' => $request->get('date_pengobatan')
         ]);
@@ -152,12 +218,13 @@ class ReceiptController extends Controller
             $template->setValue('no', substr($data->no_receipt, 3, 3));
             $template->setValue('price', number_format($data->price));
             $template->setValue('mr', $data->medical_record);
+            $template->setValue('no_va', $penjamin->no_va);
             $template->setValue('datedd', date('d-m-Y', strtotime($data->created_at)) );
         }else if ($category == "kredit") {
             $template = new \PhpOffice\PhpWord\TemplateProcessor(public_path('/templates/Kredit.docx'));
             $discount = $data->discount / 100 * $data->price;
-            $template->setValue('disc', number_format($discount));
-            $template->setValue('discount', number_format($discount));
+            $template->setValue('disc', number_format($data->discount));
+            $template->setValue('discount', number_format($data->discount));
             $template->setValue('price', number_format($data->price));
             $template->setValue('discount_percent', $data->discount);
         } else {
@@ -192,7 +259,7 @@ class ReceiptController extends Controller
  
         $savePdfPath = public_path($data->nama_pasien."-".$category.'.pdf');
 
-        if ( file_exists($savePdfPath) ) {
+        if (file_exists($savePdfPath)) {
             unlink($savePdfPath);
         }
  
@@ -202,5 +269,6 @@ class ReceiptController extends Controller
         if ( file_exists($saveDocPath) ) {
             unlink($saveDocPath);
         }
+        // $this->response()->download($savePdfPath);
     }
 }

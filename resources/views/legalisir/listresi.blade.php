@@ -18,9 +18,11 @@
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb breadcrumb-style1">
         <li class="breadcrumb-item">
-          <a href="javascript:void(0);">Resi</a>
+          <a href="{{route('listresi')}}">Resi</a>
         </li>
-        <li class="breadcrumb-item active">Data</li>
+        <li class="breadcrumb-item active">
+          <a href="{{route('listresi')}}">Data</a>
+        </li>
       </ol>
     </nav>
 </h4>

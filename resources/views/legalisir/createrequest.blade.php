@@ -72,7 +72,8 @@
             <select id="insurance" name="insurance" class="form-select mb-2">
               <option value="">--Pilih Penjamin--</option>
               @foreach ($insurance as $items)
-                <option value="{{$items->name}}" >{{$items->name}}</option>
+                <option value="{{$items->name}}" >{{$items->name}}</o
+                ption>
               @endforeach
             </select>
               <span id="discount" class="ml-4"></span>
@@ -102,6 +103,13 @@
                     <option value="2" >Selesai</option>
                     <option value="3" >Diambil</option>
                 </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-icon-default-fullname">Total Biaya Pengobatan</label>
+            <div class="input-group input-group-merge">
+              <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+              <input type="text" class="form-control" id="price_medicine" name="price_medicine" placeholder="Biaya Pengobatan" aria-label="Biaya Pengobatan" aria-describedby="basic-icon-default-fullname2" />
             </div>
           </div>
           <div class="mb-3">

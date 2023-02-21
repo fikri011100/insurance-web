@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\File;
 
 class RequestController extends Controller
 {
-    //
+
     public function index(Request $request) {
         $requests['requests'] = Requests::sortable()->orderBy('created_at', 'desc')->paginate(10)->onEachSide(2)->fragment('requests');
         $requests['insurance'] = Insurances::orderBy('name', 'ASC')->get();
@@ -35,6 +35,13 @@ class RequestController extends Controller
                                     ->paginate(10)
                                     ->onEachSide(2)->fragment('requests');
         }
+        if (request('search')) {
+            $requests['requests'] = Requests::where("name", "like", "%" . $request->get('search'))
+            ->sortable()
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->onEachSide(2)->fragment('requests');
+        }
 
         return view('legalisir.requestlist', $requests);
     }
@@ -44,9 +51,8 @@ class RequestController extends Controller
         $prices = Price::where("status", 0)->first();
         $price = $prices->legalisir_price * $request->get('insurance_set');
         $statusPayment = "0";
-        $discount = Discount::where('insurance', $request->get('insurance')->first();
-        $priceDiscount = ($discount->base_discount / 100) * $price;
-
+        $discount = Discount::where('insurance', $request->get('insurance')->first());
+        $priceMedicine = ($discount->base_discount / 100) * $request->get('price_medicine');
 
         if($request->hasfile('photo_payment')){
             $files = $request->file('photo_payment');
@@ -70,12 +76,14 @@ class RequestController extends Controller
             'insurance' => $request->get('insurance'),
             'episode' => $request->get('episode'),
             'insurance_set' => $request->get('insurance_set'),
-            'total_price' => $priceDiscount,
+            'total_price' => $price,
             'status' => $request->get('status'),
             'status_payment' => $statusPayment,
             'photo_payment' => $namePayment,
-            'photo_taker' => $nameTaker
+            'photo_taker' => $nameTaker,
+            'price_medicine' => $priceMedicine
         ]);
+
         return redirect()->route('requestlist')->with('message', 'Berhasil menambah Data!');
     }
 
@@ -145,8 +153,13 @@ class RequestController extends Controller
         return view('legalisir.requestprogress', $data);
     }
 
-    public function listResi() {
+    public function listResi(Request $request) {
         $data = Resi::orderBy('created_at', 'desc')->paginate();
+
+        if (request('search')) {
+            $data = Resi::where('no_resi', 'like', '%' . $request->get('search'))
+            ->orderBy('created_at', 'desc')->paginate();
+        }
 
         return view('legalisir.listresi', compact('data'));
     }
@@ -250,7 +263,7 @@ class RequestController extends Controller
         $template->setValue('total_price', number_format($data->total_price));
         $template->setValue('tanggal_berobat', date('d F Y', strtotime($data->date_medicine)));
         $template->setValue('total_set', $data->insurance_set);
-        $template->setImageValue('ttd', array('path' => public_path('/storage/signature/' . $user->signature), 'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(3), 'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(3), 'ratio' => true));
+        //$template->setImageValue('ttd', array('path' => public_path('/storage/signature/' . $user->signature), 'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(3), 'height' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(3), 'ratio' => true));
         // $template->setImageValue('ttd', public_path('/storage/signature/' . $user->signature));
         // $template->setImageValue('ttd', function() {
         //     return array('path' => public_path('/storage/signature/' . $user->signature), 'width' => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(3), 'height'=> \PhpOffice\PhpWord\Shared\Converter::cmToPixel(3), 'ratio'=> false);

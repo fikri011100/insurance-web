@@ -30,13 +30,14 @@ class Requests extends Model
         'photo_payment',
         'photo_taker',
         'photo_ktp',
-        'photo_kk'
+        'photo_kk',
+        'price_medicine'
     ];
 
     protected $sortable = [
         'created_at',
         'birthday',
-        'date_medicine'
-
+        'date_medicine',
+        'price_medicine'
     ];
 }

@@ -8,8 +8,18 @@ use App\Models\Insurances;
 class InsuranceController extends Controller
 {
     //
-    public function index() {
-        $insurances = Insurances::sortable()->orderBy('name', 'asc')->paginate(15)->onEachSide(2)->fragment('insurance');
+    public function index(Request $request) {
+        if (request('search')) {
+            $insurances = Insurances::sortable()
+            ->where('name', 'like', '%' . $request->get('search') . '%')
+            ->orWhere('no_va', 'like', '%' . $request->get('search') . '%')
+            ->orderBy('name', 'asc')->paginate(15)->onEachSide(2)
+            ->fragment('insurance');
+        } else {
+            $insurances = Insurances::sortable()
+            ->orderBy('name', 'asc')->paginate(15)->onEachSide(2)
+            ->fragment('insurance');
+        }
 
         return view('legalisir.insurancelist', compact('insurances'));
     }

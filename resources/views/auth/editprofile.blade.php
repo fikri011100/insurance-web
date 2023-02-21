@@ -49,15 +49,6 @@
                       <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Konfirmasi Password" aria-label="Konfirmasi Password" aria-describedby="basic-icon-default-fullname2" />
                   </div>
               </div>
-              <div class="mb-3">
-                  <label for="formFile" class="form-label">Pilih Foto Tanda Tangan</label> 
-                  <div class="input-group input-group-merge">
-                      <input class="form-control" type="file" id="signature" name="signature" aria-describedby="buttonView">
-                      @if ($data->signature != null)
-                        <button class="btn btn-outline-primary" type="button" id="buttonView" data-bs-toggle="modal" data-bs-target="#modalSignature">Lihat TTD</button>
-                      @endif
-                  </div>
-              </div>
             <button type="submit" class="btn btn-primary px-px">Update</button>
           </form>
         </div>

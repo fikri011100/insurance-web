@@ -11,6 +11,7 @@
 @elseif(session('error'))
     <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="alert alert-danger">
         {{ session('error') }}
+        //132a
     </div>
 @endif
 

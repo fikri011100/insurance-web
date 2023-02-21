@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('total_price');
             $table->string('status');
             $table->string('status_payment');
+            $table->integer('price_medicine');
             $table->string('photo_payment')->nullable();
             $table->string('photo_taker')->nullable();
             $table->string('photo_ktp')->nullable();

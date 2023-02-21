@@ -33,14 +33,45 @@ $navbarDetached = ($navbarDetached ?? '');
 
       <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        <div class="navbar-nav align-items-center">
-          <div class="nav-item d-flex align-items-center">
-            <i class="bx bx-search fs-4 lh-0"></i>
-            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search...">
-          </div>
-        </div>
+        @if(Route::is('listinsurances'))
+          <form action="{{route('listinsurances')}}" method="GET">
+            <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search (Nama atau Nomor VA)" aria-label="Search (Nama atau Nomor VA)">
+              </div>
+            </div>
+          </form>
+        @elseif(Route::is('requestlist'))
+          <form action="{{route('requestlist')}}" method="GET">
+            <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search Name" aria-label="Search...">
+              </div>
+            </div>
+          </form>
+        @elseif(Route::is('listresi'))
+          <form action="{{route('listresi')}}" method="GET">
+            <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search Resi" aria-label="Search...">
+              </div>
+            </div>
+          </form>
+        @elseif(Route::is('receiptList'))
+          <form action="{{route('receiptList')}}" method="GET">
+            <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search Kwitansi" aria-label="Search...">
+              </div>
+            </div>
+          </form>
+        @endif
         <!-- /Search -->
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
+        <ul class="navbar-nav flex-row  ms-auto">
 
           <!-- User -->
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -59,8 +90,21 @@ $navbarDetached = ($navbarDetached ?? '');
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <span class="fw-semibold d-block">John Doe</span>
-                      <small class="text-muted">Admin</small>
+                      <span class="fw-semibold d-block">{{auth()->user()->username}}</span>
+                      @php $type = ""; @endphp
+                      @if (auth()->user()->user_type == "0")
+                        @php $type = "Admin"; @endphp
+                        <small class="text-muted">{{$type}}</small>
+                      @elseif (auth()->user()->user_type == "1")
+                        @php $type = "Kwitansi"; @endphp
+                        <small class="text-muted">{{$type}}</small>
+                      @elseif (auth()->user()->user_type == "2")
+                        @php $type = "User"; @endphp
+                        <small class="text-muted">{{$type}}</small>
+                      @elseif (auth()->user()->user_type == "3")
+                        @php $type = "CS"; @endphp
+                        <small class="text-muted">{{$type}}</small>
+                      @endif
                     </div>
                   </div>
                 </a>
@@ -75,21 +119,6 @@ $navbarDetached = ($navbarDetached ?? '');
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="javascript:void(0);">
-                  <i class='bx bx-cog me-2'></i>
-                  <span class="align-middle">Settings</span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="javascript:void(0);">
-                  <span class="d-flex align-items-center align-middle">
-                    <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                    <span class="flex-grow-1 align-middle">Billing</span>
-                    <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                  </span>
-                </a>
-              </li>
-              <li>
                 <div class="dropdown-divider"></div>
               </li>
               <li>
@@ -100,8 +129,6 @@ $navbarDetached = ($navbarDetached ?? '');
               </li>
             </ul>
           </li>
-          <!--/ User -->
-        </ul>
       </div>
 
       @if(!isset($navbarDetached))

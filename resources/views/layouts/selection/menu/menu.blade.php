@@ -13,14 +13,14 @@
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1 mt-5">
-    @foreach ($menuData[0]->cs as $cs)
+    @foreach ($menuData[0]->cs as $menu)
 
     {{-- adding active and open class if child is active --}}
 
     {{-- menu headers --}}
-    @if (isset($cs->menuHeader))
+    @if (isset($menu->menuHeader))
     <li class="menu-header small text-uppercase">
-      <span class="menu-header-text">{{ $cs->menuHeader }}</span>
+      <span class="menu-header-text">{{ $menu->menuHeader }}</span>
     </li>
 
     @else
@@ -30,19 +30,19 @@
     $activeClass = null;
     $currentRouteName = Route::currentRouteName();
 
-    if ($currentRouteName === $cs->slug) {
+    if ($currentRouteName === $menu->slug) {
     $activeClass = 'active';
     }
-    elseif (isset($cs->submenu)) {
-    if (gettype($cs->slug) === 'array') {
-    foreach($cs->slug as $slug){
+    elseif (isset($menu->submenu)) {
+    if (gettype($menu->slug) === 'array') {
+    foreach($menu->slug as $slug){
     if (str_contains($currentRouteName,$slug) and strpos($currentRouteName,$slug) === 0) {
     $activeClass = 'active open';
     }
     }
     }
     else{
-    if (str_contains($currentRouteName,$cs->slug) and strpos($currentRouteName,$cs->slug) === 0) {
+    if (str_contains($currentRouteName,$menu->slug) and strpos($currentRouteName,$menu->slug) === 0) {
     $activeClass = 'active open';
     }
     }
@@ -52,16 +52,16 @@
 
     {{-- main menu --}}
     <li class="menu-item {{$activeClass}}">
-      <a href="{{ isset($cs->url) ? url($cs->url) : 'javascript:void(0);' }}" class="{{ isset($cs->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}" @if (isset($menu->target) and !empty($cs->target)) target="_blank" @endif>
-        @isset($cs->icon)
-        <i class="{{ $cs->icon }}"></i>
+      <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}" class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}" @if (isset($menu->target) and !empty($menu->target)) target="_blank" @endif>
+        @isset($menu->icon)
+        <i class="{{ $menu->icon }}"></i>
         @endisset
-        <div>{{ isset($cs->name) ? __($cs->name) : '' }}</div>
+        <div>{{ isset($menu->name) ? __($menu->name) : '' }}</div>
       </a>
 
       {{-- submenu --}}
-      @isset($cs->submenu)
-      @include('layouts.selection.menu.submenu',['cs' => $cs->submenu])
+      @isset($menu->submenu)
+      @include('layouts.selection.menu.submenu',['menu' => $menu->submenu])
       @endisset
     </li>
     @endif

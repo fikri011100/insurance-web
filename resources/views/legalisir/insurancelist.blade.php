@@ -20,7 +20,9 @@
         <li class="breadcrumb-item">
           <a href="javascript:void(0);">Asuransi</a>
         </li>
-        <li class="breadcrumb-item active">Data</li>
+        <li class="breadcrumb-item active">
+        <a href="{{route('listinsurances')}}">Data</a>
+        </li>
       </ol>
     </nav>
 </h4>
@@ -35,8 +37,7 @@
         <tr class="text-nowrap">
           <th>No</th>
           <th>@sortablelink('name','Nama Asuransi')</th>
-          <th>@sortablelink('no_va','Nomor VA')</th>
-          <th>Alamat</th>
+          <th>Nomor VA</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -52,7 +53,6 @@
             <tr class="text-nowrap">
               <td>{{ $nomor++ }}</td>
               <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$item->name}}</strong></td>
-              <td>{{$item->no_va}}</td>
               <td>{{$item->no_va}}</td>
               @if ($item->status == '1')
                 <td><span class="badge bg-label-warning me-1">Tidak Aktif</span></td>
@@ -86,7 +86,6 @@
             <form action="{{route('deleteInsurance', $item->id)}}" method="POST", enctype="multipart/form-data">
               @csrf
               <text>Apakah anda yakin ingin me-nonaktifkan asuransi {{$item->name}}?</text>
-
                 <div class="row mt-3">
                   <div class="col mb-3">
                     <label for="nameLarge" class="form-label">Keterangan</label>
@@ -124,5 +123,5 @@
 </div>
 <div class="buy-now">
     <a href="{{route('addInsurance')}}" class="btn btn-danger btn-buy-now">Tambah Data Asuransi</a>
-  </div>
+</div>
 @endsection

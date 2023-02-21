@@ -7,6 +7,7 @@ use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\PriceController;
+use App\Http\Livewire\ReceiptSummary;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,60 +29,65 @@ Auth::routes();
 //finance
 Route::middleware(['auth'])->group(function () {
   
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/', [HomeController::class, 'showDashboard'])->name('showDashboard');
-    Route::get('/profile/{id}', [HomeController::class, 'editProfile'])->name('editProfile');
-    Route::post('updateprofile/{id}', [HomeController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/copylegalisir/home', [HomeController::class, 'index'])->name('home');
+    Route::get('copylegalisir/', [HomeController::class, 'showDashboard'])->name('showDashboard');
+    Route::get('/copylegalisir/profile/{id}', [HomeController::class, 'editProfile'])->name('editProfile');
+    Route::post('/copylegalisir/updateprofile/{id}', [HomeController::class, 'updateProfile'])->name('updateProfile');
 
     //requests
     Route::resource('requestslist', 'App\Http\Controllers\RequestController');
-    Route::get('/requestlist', [RequestController::class, 'index'])->name('requestlist');
-    Route::post('/create', [RequestController::class, 'createRequest'])->name('create-requestlist');
-    Route::post('/update/{id}', [RequestController::class, 'updateDataRequest'])->name('update-requestlist');
-    Route::get('/addrequest', [RequestController::class, 'addRequest'])->name('addrequest');
-    Route::get('/editrequest/{id}', [RequestController::class, 'editRequest'])->name('editRequest');
-    Route::get('/convertrequest/{id}', [RequestController::class, 'convertRequestToPDF'])->name('convertRequestToPDF');
+    Route::get('/copylegalisir/requestlist', [RequestController::class, 'index'])->name('requestlist');
+    Route::post('/copylegalisir/create', [RequestController::class, 'createRequest'])->name('create-requestlist');
+    Route::post('/copylegalisir/update/{id}', [RequestController::class, 'updateDataRequest'])->name('update-requestlist');
+    Route::get('/copylegalisir/addrequest', [RequestController::class, 'addRequest'])->name('addrequest');
+    Route::get('/copylegalisir/editrequest/{id}', [RequestController::class, 'editRequest'])->name('editRequest');
+    Route::get('/copylegalisir/convertrequest/{id}', [RequestController::class, 'convertRequestToPDF'])->name('convertRequestToPDF');
 
-    Route::get('/listprogress/{id}', [RequestController::class, 'listProgress'])->name('listProgress');
-    Route::get('/addprogress/{id}', [RequestController::class, 'addProgress'])->name('addProgress');
-    Route::post('/createprogress/{id}', [RequestController::class, 'createProgress'])->name('createProgress');
-    Route::get('/deleteprogress/{id}', [RequestController::class, 'deleteProgress'])->name('deleteProgress');
+    //progress
+    Route::get('/copylegalisir/listprogress/{id}', [RequestController::class, 'listProgress'])->name('listProgress');
+    Route::get('/copylegalisir/addprogress/{id}', [RequestController::class, 'addProgress'])->name('addProgress');
+    Route::post('/copylegalisir/createprogress/{id}', [RequestController::class, 'createProgress'])->name('createProgress');
+    Route::get('/copylegalisir/deleteprogress/{id}', [RequestController::class, 'deleteProgress'])->name('deleteProgress');
 
+    //kwitansi
     Route::resource('receiptslist', 'App\Http\Controllers\ReceiptController');
-    Route::get('/addreceipt', [ReceiptController::class, 'addReceipt'])->name('addReceipt');
-    Route::post('/inputreceipt', [ReceiptController::class, 'createReceipt'])->name('createReceipt');
-    Route::get('/receiptlist', [ReceiptController::class, 'index'])->name('receiptList');
-    Route::get('/editreceipt/{id}', [ReceiptController::class, 'editReceipt'])->name('editReceipt');
-    Route::post('/updateReceipt/{id}', [ReceiptController::class, 'updateReceipt'])->name('updateReceipt');
-    Route::get('/costrecap/{id}', [ReceiptController::class, 'costRecap'])->name('costRecap');
+    Route::get('/copylegalisir/addreceipt', [ReceiptController::class, 'addReceipt'])->name('addReceipt');
+    Route::post('/copylegalisir/inputreceipt', [ReceiptController::class, 'createReceipt'])->name('createReceipt');
+    Route::get('/copylegalisir/receiptlist', [ReceiptController::class, 'index'])->name('receiptList');
+    Route::get('/copylegalisir/editreceipt/{id}', [ReceiptController::class, 'editReceipt'])->name('editReceipt');
+    Route::post('/copylegalisir/updatereceipt/{id}', [ReceiptController::class, 'updateReceipt'])->name('updateReceipt');
+    Route::get('/copylegalisir/costrecap/{id}', [ReceiptController::class, 'costRecap'])->name('costRecap');
+    Route::get('/copylegalisir/addsummary', function() { return view('kwitansi\createsummary'); });
 
-    Route::get('/addinsurance', [InsuranceController::class, 'addInsurance'])->name('addInsurance');
-    Route::post('/createinsurance', [InsuranceController::class, 'createInsurance'])->name('createInsurance');
-    Route::get('/editinsurance/{id}', [InsuranceController::class, 'editInsurance'])->name('editInsurance');
-    Route::post('/updateinsurance/{id}', [InsuranceController::class, 'updateInsurance'])->name('updateInsurance');
-    Route::get('/deleteinsurance/{id}', [InsuranceController::class, 'deleteInsurance'])->name('deleteInsurance');
-    Route::get('/listinsurances', [InsuranceController::class, 'index'])->name('listinsurances');
+    //insurance
+    Route::get('/copylegalisir/addinsurance', [InsuranceController::class, 'addInsurance'])->name('addInsurance');
+    Route::post('/copylegalisir/createinsurance', [InsuranceController::class, 'createInsurance'])->name('createInsurance');
+    Route::get('/copylegalisir/editinsurance/{id}', [InsuranceController::class, 'editInsurance'])->name('editInsurance');
+    Route::post('/copylegalisir/updateinsurance/{id}', [InsuranceController::class, 'updateInsurance'])->name('updateInsurance');
+    Route::get('/copylegalisir/deleteinsurance/{id}', [InsuranceController::class, 'deleteInsurance'])->name('deleteInsurance');
+    Route::get('/copylegalisir/listinsurances', [InsuranceController::class, 'index'])->name('listinsurances');
 
     //discount
-    Route::get('/adddiscount', [DiscountController::class, 'addDiscount'])->name('addDiscount');
-    Route::post('/creatediscount', [DiscountController::class, 'createDiscount'])->name('createDiscount');
-    Route::get('/getDiscount/{insurance}',[DiscountController::class, 'getDiscount'])->name('getDiscount');
+    Route::get('/copylegalisir/adddiscount', [DiscountController::class, 'addDiscount'])->name('addDiscount');
+    Route::post('/copylegalisir/creatediscount', [DiscountController::class, 'createDiscount'])->name('createDiscount');
+    Route::get('/copylegalisir/getDiscount/{insurance}',[DiscountController::class, 'getDiscount'])->name('getDiscount');
 
-    Route::post('/import', [HomeController::class, 'fileImport'])->name('file-import');
-    Route::post('/importss', [HomeController::class, 'fileExport'])->name('file-export');
-    Route::get('/importfile', [HomeController::class, 'fileImportExport'])->name('fileImportExport');
+    //import insurance
+    Route::post('/copylegalisir/import', [HomeController::class, 'fileImport'])->name('file-import');
+    Route::post('/copylegalisir/importss', [HomeController::class, 'fileExport'])->name('file-export');
+    Route::get('/copylegalisir/importfile', [HomeController::class, 'fileImportExport'])->name('fileImportExport');
     //logout
 
     //prices
-    Route::post('/createprice', [PriceController::class, 'createPrice'])->name('createPrice');
-    Route::get('/addprice', [PriceController::class, 'addPrice'])->name('addprice');
-    Route::get('/listprices', [PriceController::class, 'index'])->name('listprices');
+    Route::post('/copylegalisir/createprice', [PriceController::class, 'createPrice'])->name('createPrice');
+    Route::get('/copylegalisir/addprice', [PriceController::class, 'addPrice'])->name('addprice');
+    Route::get('/copylegalisir/listprices', [PriceController::class, 'index'])->name('listprices');
 
     //kirim
-    Route::get('/listresi', [RequestController::class, 'listResi'])->name('listresi');
-    Route::post('/sendresi', [RequestController::class, 'createResi'])->name('sendResi');
+    Route::get('/copylegalisir/listresi', [RequestController::class, 'listResi'])->name('listresi');
+    Route::post('/copylegalisir/sendresi', [RequestController::class, 'createResi'])->name('sendResi');
 
-    Route::get('/logout', [HomeController::class, 'logout'])->name('logoutHome');
+    Route::get('/copylegalisir/logout', [HomeController::class, 'logout'])->name('logoutHome');
 });
 
 require __DIR__.'/auth.php';
