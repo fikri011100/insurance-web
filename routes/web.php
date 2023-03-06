@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/copylegalisir/editreceipt/{id}', [ReceiptController::class, 'editReceipt'])->name('editReceipt');
     Route::post('/copylegalisir/updatereceipt/{id}', [ReceiptController::class, 'updateReceipt'])->name('updateReceipt');
     Route::get('/copylegalisir/costrecap/{id}', [ReceiptController::class, 'costRecap'])->name('costRecap');
-    Route::get('/copylegalisir/addsummary', function() { return view('kwitansi\createsummary'); });
+    Route::get('/copylegalisir/addsummary', function() { return view('kwitansi/createsummary'); });
 
     //insurance
     Route::get('/copylegalisir/addinsurance', [InsuranceController::class, 'addInsurance'])->name('addInsurance');

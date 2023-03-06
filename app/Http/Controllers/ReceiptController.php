@@ -109,7 +109,7 @@ class ReceiptController extends Controller
         
 
         Receipt::create([
-            'no_receipt' => $$requst->get('no_kwitansi'),
+            'no_receipt' => $request->get('no_kwitansi'),
             'medical_record' => $request->get('medical_record'),
             'episode' => $request->get('episode'),
             'nama_pasien' => $request->get('nama_pasien'),

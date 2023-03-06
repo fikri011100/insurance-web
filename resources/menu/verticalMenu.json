@@ -60,13 +60,6 @@
       
     },
     {
-      "url": "/copylegalisir/adddiscount",
-      "name": "Tambah Discount",
-      "icon": "menu-icon tf-icons bx bx-layout",
-      "slug": "adddiscount"
-      
-    },
-    {
       "url": "/copylegalisir/addsummary",
       "name": "Tambah Data Summary",
       "icon": "menu-icon tf-icons bx bx-layout",
